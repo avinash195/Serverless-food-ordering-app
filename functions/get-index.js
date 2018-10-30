@@ -55,8 +55,9 @@ function* getRestaurants(event) {
   if (opts.headers['X-Amz-Security-Token']) {
     httpReq.set('X-Amz-Security-Token', opts.headers['X-Amz-Security-Token']);
   }
-
-  return (yield httpReq).body;
+  let response = (yield httpReq).body;
+  console.log('httReq' + '-----' + response);
+  return response;
 }
 
 module.exports.handler = co.wrap(function* (event, context, callback) {
