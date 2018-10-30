@@ -60,7 +60,7 @@ function* getRestaurants(event) {console.log('start get-index');
     httpReq.set('X-Amz-Security-Token', opts.headers['X-Amz-Security-Token']);
   }
 
-  console.log('opts' + '-----' + opts);
+  console.log('httpReq' + '-----' + JSON.stringify(httpReq));
   let response = (yield httpReq).body;
   console.log('httReq' + '-----' + response);
   return response;
