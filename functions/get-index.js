@@ -26,7 +26,7 @@ function* loadHtml(){
   return html;
 }
 
-function* getRestaurants(event) {
+function* getRestaurants(event) {console.log('start get-index');
   let url = URL.parse(restaurantsApiRoot);
   let opts = {
     host: url.hostname,
@@ -39,8 +39,12 @@ function* getRestaurants(event) {
     process.env.AWS_ACCESS_KEY_ID = cred.accessKeyId;
     process.env.AWS_SECRET_ACCESS_KEY = cred.secretAccessKey;
 
+    console.log('AWS_ACCESS_KEY_ID' + '-----' + process.env.AWS_ACCESS_KEY_ID);
+    console.log('AWS_SECRET_ACCESS_KEY' + '-----' + process.env.AWS_SECRET_ACCESS_KEY);
+
     if (cred.sessionToken) {
       process.env.AWS_SESSION_TOKEN = cred.sessionToken;
+      console.log('sessionToken' + '-----' + process.env.AWS_SESSION_TOKEN);
     }
   }
 
@@ -55,6 +59,8 @@ function* getRestaurants(event) {
   if (opts.headers['X-Amz-Security-Token']) {
     httpReq.set('X-Amz-Security-Token', opts.headers['X-Amz-Security-Token']);
   }
+
+  console.log('opts' + '-----' + opts);
   let response = (yield httpReq).body;
   console.log('httReq' + '-----' + response);
   return response;
